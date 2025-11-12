@@ -10,6 +10,13 @@ connectDB();
 //middleware
 app.use(express.json());
 
+
+//custom middleware to check requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
 app.use("/api/notes", notesRoutes);
 
 app.listen(PORT, () => {
