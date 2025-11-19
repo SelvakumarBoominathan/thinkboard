@@ -1,6 +1,8 @@
-import "./config/loadEnv.js";
+import cors from "cors";
 import express from "express";
+
 import { connectDB } from "./config/db.js";
+import "./config/loadEnv.js";
 import notesRoutes from "./routes/notesRoutes.js";
 import rateLimiter from "./middleware/rateLimiter.js";
 
@@ -14,12 +16,17 @@ app.use(express.json()); // this middleware allows us to parse JSON bodies
 app.use(rateLimiter);
 
 //custom middleware to check requests
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.url}`);
+//   next();
+// });
 
 app.use("/api/notes", notesRoutes);
+app.use(
+  cors({
+    origin: ["http://localhost:5173"], // Adjust this to your frontend's origin
+  })
+);
 
 // Production grade update - connect DB first and then start server
 connectDB().then(() => {
