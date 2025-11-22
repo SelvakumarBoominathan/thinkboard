@@ -7,7 +7,12 @@ const NoteCard = ({ note }) => {
   const handleDelete = (e, id) => {
     e.preventDefault();
     console.log("Delete clicked for note:", id);
+
+    if (!window.confirm("Are you sure you want to delete this note?")) return;
   };
+
+  try {
+  } catch (error) {}
 
   return (
     <Link
