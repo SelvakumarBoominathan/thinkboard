@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install --prefix BE && npm install --prefix FE"
+    "build": "npm install --prefix BE && npm install --prefix FE && npm run build --prefix FE",
+    "start": "npm run start --prefix BE"
   },
   "repository": {
     "type": "git",
